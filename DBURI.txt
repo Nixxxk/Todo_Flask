@@ -1,0 +1,5 @@
+The database URI that should be used for the connection. Examples:
+
+sqlite:////tmp/test.db
+
+mysql://username:password@server/db

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block title  %}Home{% endblock title  %}
+{% block body %}
+  
+    <!-- FORM  -->
+
+    <div class="container my-4">
+        <h2>Add Todo</h2>
+        <form action="/" method="POST">
+            <div class="mb-3">
+                <label for="title" class="form-label">TODO TITLE</label>
+                <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text"></div>
+            </div>
+            <div class="mb-3">
+                <label for="desc" class="form-label">DESCRIPTION</label>
+                <input type="text" class="form-control" name="desc" id="desc">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+
+    <!-- Table -->
+    <div class="container my-4">
+        <h2>Todo</h2>
+
+        {% if allTodo|length==0 %}
+        <div class="alert alert-dark" role="alert">
+            Nothing Here...! You like to Add your Todos now?
+          </div>
+        {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Serial_no</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                {% for todo in allTodo %}
+                <tr>
+                    <th scope="row">{{loop.index}}</th>
+                    <td>{{todo.title}}</td>
+                    <td>{{todo.desc}}</td>
+                    <td>{{todo.date_created}}</td>
+                    <td><a href="/update/{{todo.serial_no}}" type="button"
+                            class="btn  btn-outline-dark btn-sm me-10">Update</a></td>
+                    <td><a href="/delete/{{todo.serial_no}}" type="button"
+                            class="btn btn-danger  btn-outline-dark btn-sm ms-2">Delete</a></td>
+                </tr>
+            </tbody>
+        
+        {% endfor %}
+    </table>
+        {% endif %}
+
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
+ 
+    
+{% endblock body %}
